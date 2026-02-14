@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Playbook 💕</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Fredoka+One&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8B0000 0%, #C41E3A 30%, #E8415C 60%, #FF6B81 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            padding: 20px
+        }
+
+        .name-input-group {
+            text-align: center;
+            margin-top: 20px
+        }
+
+        .name-field {
+            border: none;
+            border-bottom: 3px solid #E8A0A0;
+            background: transparent;
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #C41E3A;
+            text-align: center;
+            outline: none;
+            padding: 6px 12px;
+            width: 200px;
+            transition: border-color .3s
+        }
+
+        .name-field:focus {
+            border-bottom-color: #C41E3A
+        }
+
+        .name-field::placeholder {
+            color: #E0C4BB;
+            font-size: 22px
+        }
+
+        .name-label {
+            font-family: 'Fredoka One', cursive;
+            font-size: 12px;
+            color: #C68B7C;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px
+        }
+
+        .name-amp {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #E8415C;
+            margin: 0 10px
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            border: none;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all .3s;
+            margin-top: 25px;
+            display: none;
+            letter-spacing: 1px
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(200, 30, 58, .4)
+        }
+
+        .cover-names-display {
+            font-family: 'Dancing Script', cursive;
+            font-size: 52px;
+            color: #E8415C;
+            margin: 20px 0;
+            display: none
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden
+        }
+
+        .hearts-bg .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: .15;
+            animation: floatHeart linear infinite
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(110vh) rotate(0deg) scale(1);
+                opacity: 0
+            }
+
+            10% {
+                opacity: .15
+            }
+
+            90% {
+                opacity: .15
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(.5);
+                opacity: 0
+            }
+        }
+
+        .book-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 750px
+        }
+
+        .page-counter {
+            text-align: center;
+            color: rgba(255, 255, 255, .8);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase
+        }
+
+        .book {
+            background: #FFF9F5;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3), 0 0 0 1px rgba(255, 255, 255, .1), inset 0 0 80px rgba(200, 150, 130, .08);
+            padding: 50px 45px;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            transition: transform .3s ease
+        }
+
+        .book::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(255, 200, 200, .06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(255, 220, 200, .05) 0%, transparent 50%);
+            pointer-events: none
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn .5s ease;
+            position: relative;
+            z-index: 1
+        }
+
+        .page.active {
+            display: block
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .cover-page {
+            text-align: center;
+            padding: 30px 0
+        }
+
+        .cover-stamp {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(200, 30, 58, .3);
+            border: 3px dashed rgba(255, 255, 255, .3)
+        }
+
+        .cover-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 42px;
+            color: #C41E3A;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px
+        }
+
+        .cover-names {
+            font-family: 'Dancing Script', cursive;
+            font-size: 52px;
+            color: #E8415C;
+            margin: 20px 0
+        }
+
+        .cover-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #C68B7C;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 15px
+        }
+
+        .cover-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            color: #D4A695;
+            margin-top: 30px
+        }
+
+        .cover-hearts {
+            margin-top: 20px;
+            font-size: 24px;
+            letter-spacing: 8px;
+            opacity: .6
+        }
+
+        .stamp-icon {
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            border-radius: 6px;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 2px dashed rgba(255, 255, 255, .3);
+            margin-bottom: 16px
+        }
+
+        .section-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 28px;
+            color: #C41E3A;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            line-height: 1.3
+        }
+
+        .section-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            color: #D4A695;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px
+        }
+
+        .page-decoration {
+            text-align: center;
+            opacity: .3;
+            font-size: 20px;
+            letter-spacing: 6px;
+            margin-top: 25px
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all .3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: .5px;
+            text-transform: uppercase
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200, 30, 58, .35)
+        }
+
+        .nav-btn:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 6px
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+            border: none;
+            cursor: pointer;
+            transition: all .3s;
+            padding: 0
+        }
+
+        .nav-dot.active {
+            background: white;
+            width: 24px;
+            border-radius: 4px
+        }
+
+        .print-btn {
+            background: linear-gradient(135deg, #2D8B4E, #1A6B35);
+            margin-top: 14px
+        }
+
+        .print-btn:hover {
+            box-shadow: 0 8px 25px rgba(45, 139, 78, .35)
+        }
+
+        /* INTERACTIVE STYLES */
+        .quiz-option {
+            background: linear-gradient(135deg, #FFF8F5, #FFF3EE);
+            border: 2px solid #F0D5CC;
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all .3s ease;
+            font-size: 15px;
+            color: #8B4A3A;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            user-select: none
+        }
+
+        .quiz-option:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(200, 30, 58, .12);
+            border-color: #E8A0A0
+        }
+
+        .quiz-option .opt-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: 14px;
+            flex-shrink: 0
+        }
+
+        .quiz-option.selected {
+            background: linear-gradient(135deg, #FFD6E0, #FFC0CB);
+            border-color: #E8415C;
+            color: #C41E3A;
+            font-weight: 600;
+            transform: scale(1.02)
+        }
+
+        .quiz-option.correct {
+            background: linear-gradient(135deg, #D4EDDA, #C3E6CB);
+            border-color: #28a745;
+            color: #155724
+        }
+
+        .quiz-option.correct .opt-letter {
+            background: linear-gradient(135deg, #28a745, #1A6B35)
+        }
+
+        .quiz-option.wrong {
+            background: linear-gradient(135deg, #F8D7DA, #F5C6CB);
+            border-color: #dc3545;
+            color: #721c24;
+            opacity: .6
+        }
+
+        .quiz-question {
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            color: #C41E3A;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .quiz-question .q-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD6E0, #FFC0CB);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0
+        }
+
+        .quiz-feedback {
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            display: none
+        }
+
+        .quiz-feedback.show {
+            display: block;
+            animation: fadeIn .3s ease
+        }
+
+        .quiz-score {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFF5F0, #FFEEE5);
+            border-radius: 16px;
+            border: 2px solid #F0D5CC;
+            margin-top: 16px
+        }
+
+        .quiz-score .score-num {
+            font-family: 'Fredoka One', cursive;
+            font-size: 48px;
+            color: #E8415C
+        }
+
+        .quiz-score .score-label {
+            font-size: 13px;
+            color: #C68B7C;
+            text-transform: uppercase;
+            letter-spacing: 2px
+        }
+
+        /* THIS OR THAT */
+        .tot-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 0;
+            margin-bottom: 14px;
+            align-items: stretch
+        }
+
+        .tot-choice {
+            padding: 16px 12px;
+            border-radius: 14px;
+            cursor: pointer;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #8B4A3A;
+            transition: all .3s ease;
+            border: 2px solid #F0D5CC;
+            background: linear-gradient(135deg, #FFF8F5, #FFF3EE);
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px
+        }
+
+        .tot-choice:hover {
+            transform: scale(1.04);
+            box-shadow: 0 4px 15px rgba(200, 30, 58, .15)
+        }
+
+        .tot-choice.picked {
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            color: white;
+            border-color: #A0001C;
+            font-weight: 700;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(200, 30, 58, .3)
+        }
+
+        .tot-vs {
+            font-family: 'Fredoka One', cursive;
+            font-size: 14px;
+            color: #E8415C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 8px
+        }
+
+        /* MATCH THE FOLLOWING */
+        .match-container {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 10px;
+            align-items: start
+        }
+
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .match-item {
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 2px solid #F0D5CC;
+            background: linear-gradient(135deg, #FFF8F5, #FFF3EE);
+            cursor: pointer;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: #8B4A3A;
+            transition: all .3s;
+            user-select: none
+        }
+
+        .match-item:hover {
+            border-color: #E8A0A0;
+            box-shadow: 0 3px 10px rgba(200, 30, 58, .1)
+        }
+
+        .match-item.active {
+            background: linear-gradient(135deg, #FFD6E0, #FFC0CB);
+            border-color: #E8415C;
+            color: #C41E3A;
+            font-weight: 600;
+            transform: scale(1.05)
+        }
+
+        .match-item.matched {
+            background: linear-gradient(135deg, #D4EDDA, #C3E6CB);
+            border-color: #28a745;
+            color: #155724;
+            pointer-events: none
+        }
+
+        .match-lines {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #F0D5CC
+        }
+
+        .match-hint {
+            text-align: center;
+            font-size: 12px;
+            color: #D4A695;
+            margin-top: 10px;
+            font-style: italic
+        }
+
+        /* RATE WITH HEARTS */
+        .rate-item {
+            background: linear-gradient(135deg, #FFF8F5, #FFF3EE);
+            border: 1.5px solid #F0D5CC;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .rate-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #8B4A3A;
+            flex: 1
+        }
+
+        .rate-hearts {
+            display: flex;
+            gap: 4px
+        }
+
+        .rate-heart {
+            font-size: 26px;
+            cursor: pointer;
+            transition: all .2s;
+            filter: grayscale(1) opacity(.3);
+            user-select: none
+        }
+
+        .rate-heart.filled {
+            filter: none;
+            transform: scale(1.15)
+        }
+
+        .rate-heart:hover {
+            transform: scale(1.3)
+        }
+
+        /* WOULD YOU RATHER */
+        .wyr-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #F0D5CC
+        }
+
+        .wyr-option {
+            padding: 24px 16px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #8B4A3A;
+            transition: all .3s;
+            user-select: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 90px
+        }
+
+        .wyr-option:first-child {
+            background: linear-gradient(135deg, #FFF5F0, #FFEEE5);
+            border-right: 2px solid #F0D5CC
+        }
+
+        .wyr-option:last-child {
+            background: linear-gradient(135deg, #F0F5FF, #E5EEFF)
+        }
+
+        .wyr-option:hover {
+            filter: brightness(0.97)
+        }
+
+        .wyr-option.chosen {
+            font-weight: 700;
+            transform: scale(1.02)
+        }
+
+        .wyr-option:first-child.chosen {
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            color: white
+        }
+
+        .wyr-option:last-child.chosen {
+            background: linear-gradient(135deg, #4A90D9, #2E6DB4);
+            color: white
+        }
+
+        .wyr-emoji {
+            font-size: 28px
+        }
+
+        .wyr-vs {
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #C41E3A;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka One', cursive;
+            font-size: 11px;
+            z-index: 2;
+            border: 3px solid #FFF9F5
+        }
+
+        /* SPIN WHEEL */
+        .wheel-container {
+            text-align: center;
+            margin-top: 10px
+        }
+
+        .wheel-display {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 6px solid #E8415C;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            background: linear-gradient(135deg, #FFF5F0, #FFEEE5);
+            transition: transform .1s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .wheel-display.spinning {
+            animation: wheelSpin .15s linear infinite
+        }
+
+        @keyframes wheelSpin {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        .wheel-result {
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            color: #C41E3A;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px
+        }
+
+        .spin-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B4513;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all .3s;
+            box-shadow: 0 4px 15px rgba(255, 165, 0, .4)
+        }
+
+        .spin-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 165, 0, .5)
+        }
+
+        .spin-btn:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        /* COUPLE BINGO - keeping existing */
+        .bingo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 10px
+        }
+
+        .bingo-cell {
+            background: linear-gradient(135deg, #FFF5F0, #FFF0EA);
+            border: 1.5px solid #F0D5CC;
+            border-radius: 8px;
+            padding: 10px 6px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: #8B4A3A;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            cursor: pointer;
+            transition: all .3s ease;
+            user-select: none;
+            line-height: 1.3;
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .bingo-cell:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 30, 58, .15)
+        }
+
+        .bingo-cell.checked {
+            background: linear-gradient(135deg, #FFD6E0, #FFC0CB);
+            border-color: #E8415C;
+            color: #C41E3A;
+            font-weight: 600
+        }
+
+        .bingo-cell.center-cell {
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            color: white;
+            font-weight: 700;
+            border-color: #A0001C;
+            font-size: 11px
+        }
+
+        .bingo-cell.center-cell.checked {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-color: #FF8C00;
+            color: #8B4513
+        }
+
+        /* LOVE SLIDERS */
+        .slider-item {
+            margin-bottom: 22px
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px
+        }
+
+        .slider-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #8B4A3A
+        }
+
+        .slider-val {
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            color: #E8415C
+        }
+
+        .love-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #F0D5CC, #FFD6E0);
+            outline: none;
+            transition: all .3s
+        }
+
+        .love-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(200, 30, 58, .4);
+            transition: transform .2s
+        }
+
+        .love-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2)
+        }
+
+        .love-slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E8415C, #C41E3A);
+            cursor: pointer;
+            border: none
+        }
+
+        .compat-result {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFF5F0, #FFEEE5);
+            border-radius: 16px;
+            border: 2px solid #F0D5CC;
+            margin-top: 20px
+        }
+
+        .compat-num {
+            font-family: 'Fredoka One', cursive;
+            font-size: 56px;
+            color: #E8415C
+        }
+
+        .compat-bar {
+            height: 14px;
+            border-radius: 7px;
+            background: #F0D5CC;
+            margin-top: 10px;
+            overflow: hidden
+        }
+
+        .compat-fill {
+            height: 100%;
+            border-radius: 7px;
+            background: linear-gradient(to right, #FF6B81, #E8415C, #C41E3A);
+            transition: width .8s ease;
+            width: 0%
+        }
+
+        /* Quick letter */
+        .letter-area {
+            width: 100%;
+            min-height: 120px;
+            border: 1.5px solid #F0D5CC;
+            border-radius: 12px;
+            background: linear-gradient(to bottom, transparent 0px, transparent 29px, #F0D5CC 29px, #F0D5CC 30px);
+            background-size: 100% 30px;
+            padding: 6px 16px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: #8B4A3A;
+            outline: none;
+            resize: none;
+            line-height: 30px
+        }
+
+        .letter-area:focus {
+            border-color: #E8415C
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0)
+            }
+
+            50% {
+                transform: scale(1.2)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-80px) rotate(720deg);
+                opacity: 0
+            }
+        }
+
+        @media(max-width:600px) {
+            .book {
+                padding: 30px 25px;
+                min-height: auto
+            }
+
+            .cover-title {
+                font-size: 28px
+            }
+
+            .cover-names {
+                font-size: 36px
+            }
+
+            .section-title {
+                font-size: 22px
+            }
+
+            .match-container {
+                grid-template-columns: 1fr 40px 1fr;
+                gap: 6px
+            }
+
+            .tot-row {
+                gap: 0
+            }
+
+            .wyr-card {
+                grid-template-columns: 1fr
+            }
+
+            .wyr-option:first-child {
+                border-right: none;
+                border-bottom: 2px solid #F0D5CC
+            }
+
+            .wyr-vs {
+                right: 50%;
+                top: auto;
+                bottom: -18px;
+                transform: translateX(50%)
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 12px
+            }
+
+            .wheel-display {
+                width: 180px;
+                height: 180px;
+                font-size: 48px
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0
+            }
+
+            .book {
+                box-shadow: none;
+                border: 1px solid #eee
+            }
+
+            .nav,
+            .page-counter,
+            .hearts-bg,
+            .print-btn {
+                display: none !important
+            }
+
+            .page {
+                display: block !important;
+                page-break-after: always
+            }
+
+            .page:last-child {
+                page-break-after: avoid
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hearts-bg" id="heartsBg"></div>
+    <div class="book-wrapper">
+        <div class="page-counter" id="pageCounter">Page 1 of 10</div>
+        <div class="book">
+
+            <!-- PAGE 0: Cover -->
+            <div class="page active" data-page="0">
+                <div class="cover-page">
+                    <div class="cover-stamp">💝</div>
+                    <div class="cover-title">Our Love<br>Playbook</div>
+                    <div class="cover-names-display" id="coverNames"></div>
+                    <div class="name-input-group" id="nameInputGroup">
+                        <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px">
+                            <div>
+                                <div class="name-label">Partner 1</div>
+                                <input type="text" class="name-field" id="name1" placeholder="Name" maxlength="15"
+                                    oninput="checkNames()">
+                            </div>
+                            <span class="name-amp">&</span>
+                            <div>
+                                <div class="name-label">Partner 2</div>
+                                <input type="text" class="name-field" id="name2" placeholder="Name" maxlength="15"
+                                    oninput="checkNames()">
+                            </div>
+                        </div>
+                        <button class="start-btn" id="startBtn" onclick="startPlaybook()">Let's Play! 💕</button>
+                    </div>
+                    <div class="cover-subtitle">Play · Laugh · Love · Discover</div>
+                    <div class="cover-date">Valentine's Day 2026</div>
+                    <div class="cover-hearts">♡ ♡ ♡ ♡ ♡</div>
+                    <p style="margin-top:30px;color:#C68B7C;font-size:13px;font-style:italic;">
+                        Enter your names & tap play — no writing needed! 🎮
+                    </p>
+                </div>
+            </div>
+
+            <!-- PAGE 1: How Well Do You Know Me? Quiz -->
+            <div class="page" data-page="1">
+                <div class="stamp-icon">🧠</div>
+                <div class="section-title">How Well Do<br>You Know Me?</div>
+                <div class="section-subtitle">Take turns answering · Tap your guess!</div>
+                <div id="quizContainer"></div>
+                <div class="page-decoration">♡ 🧠 ♡</div>
+            </div>
+
+            <!-- PAGE 2: Match The Following -->
+            <div class="page" data-page="2">
+                <div class="stamp-icon">🔗</div>
+                <div class="section-title">Match The<br>Following</div>
+                <div class="section-subtitle">Tap left then right to match pairs!</div>
+                <div class="match-container">
+                    <div class="match-col" id="matchLeft"></div>
+                    <div class="match-lines">⟷</div>
+                    <div class="match-col" id="matchRight"></div>
+                </div>
+                <div class="match-hint" id="matchHint">Tap an item on the left, then its match on the right!</div>
+                <div class="page-decoration">💕</div>
+            </div>
+
+            <!-- PAGE 3: This or That -->
+            <div class="page" data-page="3">
+                <div class="stamp-icon">⚡</div>
+                <div class="section-title">This or That</div>
+                <div class="section-subtitle">Both of you tap your preference!</div>
+                <div id="totContainer"></div>
+                <div class="page-decoration">⚡ 💕 ⚡</div>
+            </div>
+
+            <!-- PAGE 4: Couple Bingo -->
+            <div class="page" data-page="4">
+                <div class="stamp-icon">🎯</div>
+                <div class="section-title">Things We've<br>Done Together</div>
+                <div class="section-subtitle">Tap to check off your adventures!</div>
+                <div class="bingo-grid" id="bingoGrid">
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Shared Childhood Stories</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Went on a Double Date</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Had a Movie Marathon</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Sang a Song Really Loud</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Made a Time Capsule</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Went Stargazing</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Watched the Sunrise</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Went on a Road Trip</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Took Pics in a Photo Booth</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Baked Something Yummy</div>
+                    <div class="bingo-cell center-cell checked" onclick="toggleBingo(this)">Fallen For Each Other ❤️
+                    </div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Tried an Extreme Sport</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Had a Pillow Fight</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Got Matching Outfits</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Cooked Together</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Travelled Together</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Tried Each Other's Hobby</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Had a Long Late Night Call</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Watched Fireworks Together</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Saw a Play / Musical</div>
+                    <div class="bingo-cell" onclick="toggleBingo(this)">Danced Together</div>
+                </div>
+                <div class="page-decoration">🎉</div>
+            </div>
+
+            <!-- PAGE 5: Rate Our Moments -->
+            <div class="page" data-page="5">
+                <div class="stamp-icon">⭐</div>
+                <div class="section-title">Rate Our<br>Moments</div>
+                <div class="section-subtitle">Tap the hearts to rate!</div>
+                <div id="rateContainer"></div>
+                <div class="page-decoration">♡ ⭐ ♡</div>
+            </div>
+
+            <!-- PAGE 6: Would You Rather -->
+            <div class="page" data-page="6">
+                <div class="stamp-icon">🤔</div>
+                <div class="section-title">Would You<br>Rather...</div>
+                <div class="section-subtitle">Tap your choice · Compare answers!</div>
+                <div id="wyrContainer"></div>
+                <div class="page-decoration">🤔 💕 🤔</div>
+            </div>
+
+            <!-- PAGE 7: Spin the Wheel -->
+            <div class="page" data-page="7">
+                <div class="stamp-icon">🎰</div>
+                <div class="section-title">Spin The<br>Love Wheel</div>
+                <div class="section-subtitle">Spin & do the challenge together!</div>
+                <div class="wheel-container">
+                    <div class="wheel-display" id="wheelDisplay">🎡</div>
+                    <div class="wheel-result" id="wheelResult">Tap the button to spin!</div>
+                    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">🎲 SPIN!</button>
+                </div>
+                <div class="page-decoration">🎡 🎲 🎡</div>
+            </div>
+
+            <!-- PAGE 8: Love Compatibility Sliders -->
+            <div class="page" data-page="8">
+                <div class="stamp-icon">💘</div>
+                <div class="section-title">Love<br>Meter</div>
+                <div class="section-subtitle">Slide to rate · See your compatibility!</div>
+                <div id="sliderContainer"></div>
+                <div class="compat-result">
+                    <div class="compat-num" id="compatNum">0%</div>
+                    <div
+                        style="font-size:12px;color:#C68B7C;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">
+                        Compatibility Score</div>
+                    <div class="compat-bar">
+                        <div class="compat-fill" id="compatFill"></div>
+                    </div>
+                </div>
+                <div class="page-decoration">💘</div>
+            </div>
+
+            <!-- PAGE 9: Final Page -->
+            <div class="page" data-page="9">
+                <div class="stamp-icon">✉️</div>
+                <div class="section-title">A Quick Note<br>to Each Other</div>
+                <div class="section-subtitle">Just a few sweet words</div>
+                <div style="margin-bottom:20px">
+                    <div style="font-family:'Fredoka One',cursive;font-size:13px;color:#C41E3A;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px"
+                        id="letterLabel1">💌 From Partner 1 to Partner 2</div>
+                    <textarea class="letter-area" placeholder="Just a few words from the heart..."
+                        style="min-height:100px"></textarea>
+                </div>
+                <div>
+                    <div style="font-family:'Fredoka One',cursive;font-size:13px;color:#C41E3A;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px"
+                        id="letterLabel2">💌 From Partner 2 to Partner 1</div>
+                    <textarea class="letter-area" placeholder="Just a few words from the heart..."
+                        style="min-height:100px"></textarea>
+                </div>
+                <div style="text-align:center;margin-top:24px">
+                    <div style="font-family:'Dancing Script',cursive;font-size:26px;color:#C41E3A">Happy Valentine's
+                        Day! 💕</div>
+                    <div style="font-family:'Poppins',sans-serif;font-size:12px;color:#D4A695;margin-top:5px;letter-spacing:2px"
+                        id="footerNames">FEBRUARY 14, 2026</div>
+                </div>
+                <div class="page-decoration">💝 💝 💝</div>
+            </div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn" id="prevBtn" onclick="changePage(-1)" disabled>← Back</button>
+            <div class="nav-dots" id="navDots"></div>
+            <button class="nav-btn" id="nextBtn" onclick="changePage(1)">Next →</button>
+        </div>
+        <div style="text-align:center;margin-top:10px">
+            <button class="nav-btn print-btn" onclick="window.print()">🖨️ Print Playbook</button>
+        </div>
+    </div>
+
+    <script>
+        // ============ FLOATING HEARTS ============
+        const heartsBg = document.getElementById('heartsBg');
+        ['♡', '❤', '💕', '💗', '💖', '✦', '♥'].forEach((_, i) => { for (let j = 0; j < 4; j++) { const h = document.createElement('span'); h.className = 'heart'; h.textContent = ['♡', '❤', '💕', '💗', '💖', '✦', '♥'][Math.floor(Math.random() * 7)]; h.style.left = Math.random() * 100 + '%'; h.style.animationDuration = (10 + Math.random() * 20) + 's'; h.style.animationDelay = (Math.random() * 15) + 's'; h.style.fontSize = (14 + Math.random() * 20) + 'px'; heartsBg.appendChild(h) } });
+
+        // ============ PAGE NAVIGATION ============
+        let currentPage = 0; const pages = document.querySelectorAll('.page'), totalPages = pages.length;
+        const prevBtn = document.getElementById('prevBtn'), nextBtn = document.getElementById('nextBtn'), pageCounter = document.getElementById('pageCounter'), navDots = document.getElementById('navDots');
+        for (let i = 0; i < totalPages; i++) { const d = document.createElement('button'); d.className = 'nav-dot' + (i === 0 ? ' active' : ''); d.onclick = () => goToPage(i); navDots.appendChild(d) }
+        function goToPage(n) { pages[currentPage].classList.remove('active'); pages[currentPage].style.display = ''; navDots.children[currentPage].classList.remove('active'); currentPage = n; pages[currentPage].style.display = ''; pages[currentPage].classList.add('active'); navDots.children[currentPage].classList.add('active'); updateNav() }
+        function changePage(d) { const n = currentPage + d; if (n >= 0 && n < totalPages) goToPage(n) }
+        function updateNav() { prevBtn.disabled = currentPage === 0; nextBtn.disabled = currentPage === totalPages - 1; const names = ['Cover', 'Quiz', 'Match', 'This or That', 'Bingo', 'Rate', 'Would You Rather', 'Spin Wheel', 'Love Meter', 'Love Notes']; pageCounter.textContent = `${names[currentPage]} · ${currentPage + 1} of ${totalPages}` }
+        document.addEventListener('keydown', e => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changePage(1); if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changePage(-1) });
+
+        // ============ QUIZ ============
+        let P1 = 'Partner 1', P2 = 'Partner 2';
+        function checkNames() { const n1 = document.getElementById('name1').value.trim(), n2 = document.getElementById('name2').value.trim(); document.getElementById('startBtn').style.display = (n1 && n2) ? 'inline-block' : 'none' }
+        function startPlaybook() {
+            P1 = document.getElementById('name1').value.trim(); P2 = document.getElementById('name2').value.trim();
+            document.getElementById('nameInputGroup').style.display = 'none';
+            const cn = document.getElementById('coverNames'); cn.textContent = P1 + ' & ' + P2; cn.style.display = 'block';
+            document.getElementById('letterLabel1').textContent = '💌 From ' + P1 + ' to ' + P2;
+            document.getElementById('letterLabel2').textContent = '💌 From ' + P2 + ' to ' + P1;
+            document.getElementById('footerNames').textContent = P1.toUpperCase() + ' & ' + P2.toUpperCase() + ' · FEBRUARY 14, 2026';
+            buildQuiz();
+            localStorage.setItem('vp_names', JSON.stringify({ p1: P1, p2: P2 }));
+            document.querySelector('.nav').style.display = 'flex';
+            document.querySelector('.print-btn').style.display = 'inline-flex';
+            // Clear any inline display overrides on all pages
+            pages.forEach(p => p.style.display = '');
+            goToPage(0);
+        }
+        function getQuizData() {
+            return [
+                { q: "What's " + P1 + "'s go-to comfort food?", opts: ["Pizza 🍕", "Dal Chawal 🍛", "Biryani 🍗", "Maggi 🍜"], ans: -1 },
+                { q: "What does " + P2 + " do when really happy?", opts: ["Dances around 💃", "Gets quiet & smiles 😊", "Talks non-stop 🗣️", "Gives a tight hug 🤗"], ans: -1 },
+                { q: "What's " + P1 + "'s hidden talent?", opts: ["Singing 🎤", "Cooking 👨‍🍳", "Making people laugh 😂", "Overthinking 🤔"], ans: -1 },
+                { q: P2 + "'s idea of a perfect Sunday?", opts: ["Netflix & chill 📺", "Long drive 🚗", "Shopping spree 🛍️", "Sleeping in ☁️"], ans: -1 },
+                { q: "Who said 'I love you' first?", opts: [P1 + " 🙋", P2 + " 🙋", "Both at once! 😂", "Still waiting... 😏"], ans: -1 }
+            ];
+        }
+        let quizScore = 0, quizAnswered = new Set(), quizData = [];
+        function buildQuiz() {
+            quizData = getQuizData(); quizScore = 0; quizAnswered = new Set();
+            const qC = document.getElementById('quizContainer'); qC.innerHTML = '';
+            qC.innerHTML = '<div style="text-align:center;font-size:13px;color:#D4A695;margin-bottom:16px;font-style:italic">Since there are no wrong answers — just tap what you think your partner would pick! Discuss after! 💬</div>';
+            quizData.forEach((q, qi) => {
+                const div = document.createElement('div'); div.style.marginBottom = '20px';
+                div.innerHTML = `<div class="quiz-question"><span class="q-num">${qi + 1}</span>${q.q}</div>`;
+                q.opts.forEach((o, oi) => {
+                    const opt = document.createElement('div'); opt.className = 'quiz-option';
+                    opt.innerHTML = `<span class="opt-letter">${'ABCD'[oi]}</span><span>${o}</span>`;
+                    opt.onclick = () => answerQuizOpen(qi, oi, opt); div.appendChild(opt);
+                });
+                qC.appendChild(div);
+            });
+        }
+        function answerQuizOpen(qi, oi, el) {
+            if (quizAnswered.has(qi)) return; quizAnswered.add(qi);
+            const opts = el.parentElement.querySelectorAll('.quiz-option');
+            el.classList.add('selected');
+            opts.forEach(o => { if (o !== el) o.style.opacity = '.4' });
+            if (quizAnswered.size === quizData.length) {
+                const qC = document.getElementById('quizContainer');
+                const fb = document.createElement('div'); fb.className = 'quiz-score';
+                fb.innerHTML = `<div class="score-num">✅ Done!</div><div class="score-label">Now compare your picks with your partner! Did you guess right? �</div>`;
+                fb.style.animation = 'fadeIn .5s ease'; qC.appendChild(fb);
+            }
+        }
+
+        // ============ MATCH THE FOLLOWING ============
+        const matchPairs = [
+            ["First Date 💑", "The day everything changed"],
+            ["Fav Memory 📸", "That time we couldn't stop laughing"],
+            ["Our Song 🎵", "The one that plays in our hearts"],
+            ["Dream Vacation ✈️", "Where we'd escape together"],
+            ["Inside Joke 😂", "Only we get it"],
+            ["Best Quality 💎", "What I admire most about you"]
+        ];
+        const shuffledRight = [...matchPairs].sort(() => Math.random() - .5);
+        let selectedLeft = null, matchCount = 0;
+        const mL = document.getElementById('matchLeft'), mR = document.getElementById('matchRight');
+        matchPairs.forEach((p, i) => {
+            const l = document.createElement('div'); l.className = 'match-item'; l.textContent = p[0]; l.dataset.idx = i;
+            l.onclick = () => { if (l.classList.contains('matched')) return; document.querySelectorAll('#matchLeft .match-item').forEach(x => x.classList.remove('active')); l.classList.add('active'); selectedLeft = i };
+            mL.appendChild(l);
+        });
+        shuffledRight.forEach((p, i) => {
+            const r = document.createElement('div'); r.className = 'match-item'; r.textContent = p[1]; r.dataset.origIdx = matchPairs.indexOf(p);
+            r.onclick = () => {
+                if (r.classList.contains('matched') || selectedLeft === null) return;
+                const origIdx = parseInt(r.dataset.origIdx);
+                if (selectedLeft === origIdx) {
+                    r.classList.add('matched'); document.querySelector(`#matchLeft .match-item[data-idx="${selectedLeft}"]`).classList.add('matched');
+                    matchCount++; selectedLeft = null;
+                    if (matchCount === matchPairs.length) document.getElementById('matchHint').textContent = '🎉 All matched! You two are in sync!';
+                } else {
+                    r.style.background = '#F8D7DA'; setTimeout(() => r.style.background = '', 500);
+                    document.querySelector(`#matchLeft .match-item.active`).classList.remove('active'); selectedLeft = null;
+                }
+            };
+            mR.appendChild(r);
+        });
+
+        // ============ THIS OR THAT ============
+        const totData = [
+            ["Mountains ⛰️", "Beach 🏖️"], ["Netflix & Chill 📺", "Go Out 🌃"],
+            ["Cook Together 👨‍🍳", "Order In 🍕"], ["Morning Person 🌅", "Night Owl 🦉"],
+            ["Road Trip 🚗", "Flight ✈️"], ["Sweet ❤️", "Spicy 🌶️"],
+            ["Planned Dates 📋", "Spontaneous 🎲"], ["Texting 💬", "Calling 📞"]
+        ];
+        const tC = document.getElementById('totContainer');
+        totData.forEach((pair, i) => {
+            const row = document.createElement('div'); row.className = 'tot-row';
+            row.innerHTML = `<div class="tot-choice" onclick="pickTot(this,${i},'A')">${pair[0]}</div><div class="tot-vs">VS</div><div class="tot-choice" onclick="pickTot(this,${i},'B')">${pair[1]}</div>`;
+            tC.appendChild(row);
+        });
+        function pickTot(el, i, side) {
+            const row = el.parentElement; row.querySelectorAll('.tot-choice').forEach(c => c.classList.remove('picked'));
+            el.classList.add('picked'); el.style.animation = 'pop .3s ease'; setTimeout(() => el.style.animation = '', 300);
+        }
+
+        // ============ RATE OUR MOMENTS ============
+        const rateItems = ["Our First Conversation", "Our First Date", "Our Funniest Moment", "Our Most Romantic Moment", "How We Handle Arguments", "Our Late Night Talks", "Our Travel Adventures", "Our Future Together"];
+        const rC = document.getElementById('rateContainer');
+        rateItems.forEach((item, i) => {
+            const div = document.createElement('div'); div.className = 'rate-item';
+            let hearts = ''; for (let h = 0; h < 5; h++)hearts += `<span class="rate-heart" onclick="rateHeart(${i},${h})" data-rate="${i}" data-h="${h}">❤️</span>`;
+            div.innerHTML = `<div class="rate-label">${item}</div><div class="rate-hearts">${hearts}</div>`;
+            rC.appendChild(div);
+        });
+        function rateHeart(i, h) {
+            document.querySelectorAll(`[data-rate="${i}"]`).forEach((heart, idx) => {
+                if (idx <= h) { heart.classList.add('filled'); heart.style.animation = 'pop .3s ease'; setTimeout(() => heart.style.animation = '', 300) }
+                else heart.classList.remove('filled');
+            });
+        }
+
+        // ============ WOULD YOU RATHER ============
+        const wyrData = [
+            { a: "Relive our first date", b: "Skip to our 50th anniversary", ea: "🔄", eb: "⏩" },
+            { a: "Read each other's minds for a day", b: "Switch bodies for a day", ea: "🧠", eb: "🔀" },
+            { a: "Always hold hands in public", b: "Always have matching outfits", ea: "🤝", eb: "👗" },
+            { a: "Go on 100 small dates", b: "One epic world trip", ea: "☕", eb: "🌍" },
+            { a: "Write a love song together", b: "Star in a movie together", ea: "🎵", eb: "🎬" }
+        ];
+        const wC = document.getElementById('wyrContainer');
+        wyrData.forEach((w, i) => {
+            const card = document.createElement('div'); card.className = 'wyr-card';
+            card.innerHTML = `<div class="wyr-option" onclick="pickWyr(this,${i})"><div class="wyr-emoji">${w.ea}</div><div>${w.a}</div><div class="wyr-vs">OR</div></div><div class="wyr-option" onclick="pickWyr(this,${i})"><div class="wyr-emoji">${w.eb}</div><div>${w.b}</div></div>`;
+            wC.appendChild(card);
+        });
+        function pickWyr(el, i) { el.parentElement.querySelectorAll('.wyr-option').forEach(o => o.classList.remove('chosen')); el.classList.add('chosen'); el.style.animation = 'pop .3s ease'; setTimeout(() => el.style.animation = '', 300) }
+
+        // ============ SPIN THE WHEEL ============
+        const challenges = ["Give each other a 30-second compliment shower! 💬", "Recreate your first ever photo together 📸", "Slow dance right now, no music needed 💃", "Tell each other 3 things you've never said before 🤫", "Give a dramatic movie-style proposal 🎭", "Feed each other something blindfolded 🍫", "Do your best impression of each other 🎭", "Write a haiku about your love right now ✍️", "Give each other nicknames for the rest of today 😜", "Stare into each other's eyes for 60 seconds 👀", "Exchange phones for 5 minutes 📱", "Plan your dream date in 2 minutes ⏱️"];
+        const wheelEmojis = ["💃", "📸", "🎭", "🤫", "💬", "🍫", "😜", "✍️", "👀", "📱", "⏱️", "🎵"];
+        let spinning = false;
+        function spinWheel() {
+            if (spinning) return; spinning = true;
+            const btn = document.getElementById('spinBtn'); btn.disabled = true;
+            const display = document.getElementById('wheelDisplay'), result = document.getElementById('wheelResult');
+            display.classList.add('spinning'); result.textContent = 'Spinning...';
+            let count = 0; const interval = setInterval(() => { display.textContent = wheelEmojis[Math.floor(Math.random() * wheelEmojis.length)]; count++; if (count > 20) { clearInterval(interval); display.classList.remove('spinning'); const idx = Math.floor(Math.random() * challenges.length); display.textContent = wheelEmojis[idx % wheelEmojis.length]; result.textContent = challenges[idx]; spinning = false; btn.disabled = false } }, 100);
+        }
+
+        // ============ LOVE SLIDERS ============
+        const sliderData = ["How much do you miss each other? 🥺", "How telepathic are you two? 🧠", "How much fun together? 🎉", "Trust level? 🤝", "How cheesy are you two? 🧀", "Inside joke frequency? 😂"];
+        const sC = document.getElementById('sliderContainer');
+        sliderData.forEach((s, i) => {
+            const div = document.createElement('div'); div.className = 'slider-item';
+            div.innerHTML = `<div class="slider-label"><span class="slider-text">${s}</span><span class="slider-val" id="sVal${i}">50%</span></div><input type="range" class="love-slider" min="0" max="100" value="50" oninput="updateSlider(${i},this.value)">`;
+            sC.appendChild(div);
+        });
+        function updateSlider(i, v) { document.getElementById(`sVal${i}`).textContent = v + '%'; updateCompat() }
+        function updateCompat() {
+            const sliders = document.querySelectorAll('.love-slider'); let sum = 0;
+            sliders.forEach(s => sum += parseInt(s.value)); const avg = Math.round(sum / sliders.length);
+            document.getElementById('compatNum').textContent = avg + '%'; document.getElementById('compatFill').style.width = avg + '%';
+        }
+        updateCompat();
+
+        // ============ BINGO ============
+        function toggleBingo(cell) { cell.classList.toggle('checked'); cell.style.transform = 'scale(1.1)'; setTimeout(() => cell.style.transform = '', 200) }
+
+        // ============ SAVE/LOAD ============
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('textarea').forEach((el, i) => data[`ta_${i}`] = el.value);
+            document.querySelectorAll('.bingo-cell').forEach((el, i) => data[`bingo_${i}`] = el.classList.contains('checked'));
+            document.querySelectorAll('.tot-choice.picked').forEach(el => { const row = el.parentElement; const idx = [...document.querySelectorAll('.tot-row')].indexOf(row); data[`tot_${idx}`] = [...row.children].indexOf(el) });
+            document.querySelectorAll('.wyr-option.chosen').forEach(el => { const card = el.parentElement; const idx = [...document.querySelectorAll('.wyr-card')].indexOf(card); data[`wyr_${idx}`] = [...card.children].indexOf(el) });
+            document.querySelectorAll('.love-slider').forEach((el, i) => data[`slider_${i}`] = el.value);
+            document.querySelectorAll('.rate-heart.filled').forEach(el => data[`rate_${el.dataset.rate}_${el.dataset.h}`] = true);
+            localStorage.setItem('valentines_playbook_interactive', JSON.stringify(data));
+        }
+        function loadData() {
+            const saved = localStorage.getItem('valentines_playbook_interactive'); if (!saved) return; const data = JSON.parse(saved);
+            document.querySelectorAll('textarea').forEach((el, i) => { if (data[`ta_${i}`]) el.value = data[`ta_${i}`] });
+            document.querySelectorAll('.bingo-cell').forEach((el, i) => { if (data[`bingo_${i}`]) el.classList.add('checked') });
+            document.querySelectorAll('.love-slider').forEach((el, i) => { if (data[`slider_${i}`] !== undefined) { el.value = data[`slider_${i}`]; document.getElementById(`sVal${i}`).textContent = data[`slider_${i}`] + '%' } });
+            document.querySelectorAll('.rate-heart').forEach(h => { if (data[`rate_${h.dataset.rate}_${h.dataset.h}`]) h.classList.add('filled') });
+            document.querySelectorAll('.tot-row').forEach((row, idx) => { if (data[`tot_${idx}`] !== undefined) row.children[data[`tot_${idx}`]].classList.add('picked') });
+            document.querySelectorAll('.wyr-card').forEach((card, idx) => { if (data[`wyr_${idx}`] !== undefined) card.children[data[`wyr_${idx}`]].classList.add('chosen') });
+            updateCompat();
+        }
+        document.addEventListener('input', () => { clearTimeout(window._st); window._st = setTimeout(saveData, 500) });
+        document.addEventListener('click', e => { if (e.target.closest('.bingo-cell,.tot-choice,.wyr-option,.rate-heart,.love-slider')) setTimeout(saveData, 200) });
+        // Load saved names
+        const savedNames = localStorage.getItem('vp_names');
+        if (savedNames) {
+            const nn = JSON.parse(savedNames);
+            document.getElementById('name1').value = nn.p1;
+            document.getElementById('name2').value = nn.p2;
+            startPlaybook();
+        } else {
+            // No names yet - hide nav, show only cover via CSS classes
+            document.querySelector('.nav').style.display = 'none';
+            document.querySelector('.print-btn').style.display = 'none';
+            updateNav();
+        }
+        loadData();
+    </script>
+</body>
+
+</html>
