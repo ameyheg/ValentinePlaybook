@@ -1052,21 +1052,33 @@
                 padding: 0
             }
 
+            .book-wrapper {
+                max-width: 100%
+            }
+
             .book {
                 box-shadow: none;
-                border: 1px solid #eee
+                border: none;
+                overflow: visible !important;
+                min-height: auto !important;
+                padding: 20px 30px
             }
 
             .nav,
             .page-counter,
             .hearts-bg,
-            .print-btn {
+            .print-btn,
+            .name-input-group,
+            .spin-btn,
+            .start-btn {
                 display: none !important
             }
 
             .page {
                 display: block !important;
-                page-break-after: always
+                page-break-after: always;
+                page-break-inside: avoid;
+                margin-bottom: 0
             }
 
             .page:last-child {
@@ -1259,7 +1271,7 @@
             <button class="nav-btn" id="nextBtn" onclick="changePage(1)">Next →</button>
         </div>
         <div style="text-align:center;margin-top:10px">
-            <button class="nav-btn print-btn" onclick="window.print()">🖨️ Print Playbook</button>
+            <button class="nav-btn print-btn" onclick="printPlaybook()">🖨️ Print Playbook</button>
         </div>
     </div>
 
@@ -1485,6 +1497,22 @@
             updateNav();
         }
         loadData();
+
+        // ============ PRINT ============
+        function printPlaybook() {
+            // Force all pages visible for printing
+            const book = document.querySelector('.book');
+            pages.forEach(p => { p.dataset.wasActive = p.classList.contains('active'); p.classList.add('active'); p.style.display = 'block'; });
+            book.style.overflow = 'visible';
+            book.style.minHeight = 'auto';
+            window.print();
+        }
+        window.addEventListener('afterprint', () => {
+            const book = document.querySelector('.book');
+            pages.forEach(p => { if (p.dataset.wasActive !== 'true') { p.classList.remove('active'); } p.style.display = ''; delete p.dataset.wasActive; });
+            book.style.overflow = '';
+            book.style.minHeight = '';
+        });
     </script>
 </body>
 
